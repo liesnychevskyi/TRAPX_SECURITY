@@ -64,7 +64,7 @@ public class TestBase
         logExtentReport("Navigate to ... " + url);
     }
 //===================================================================================//
-    ///@AfterTest
+    @AfterClass
     public void tearDown()
     {
         driver.quit();

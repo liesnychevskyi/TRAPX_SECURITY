@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.testng.annotations.Test;
 import pages.ToDo_page;
 
-public class CreateTask_test extends TestBase
+public class ClickToggleAllTasks_test extends TestBase
 {
     private Logger log = MyLogger.getLogger(CreateTask_test.class);
     String taskName_0 = "1). Task";
@@ -15,10 +15,10 @@ public class CreateTask_test extends TestBase
     String taskName_2 = "3). Task";
     String taskName_3 = "4). Task";
     String taskName_4 = "5). Task";
-    String quantity = "5";
+    String quantity = "0";
 
     @Test
-    public void toDoTaskCreation() throws InterruptedException
+    public void clickToggleAll() throws InterruptedException
     {
         driver.manage().window().maximize(); // maximize the browser window
         log.info("Window maximized..");  // log
@@ -31,9 +31,9 @@ public class CreateTask_test extends TestBase
         toDoPage.createTask(taskName_2); // create the task
         toDoPage.createTask(taskName_3); // create the task
         toDoPage.createTask(taskName_4); // create the task
+        toDoPage.clickToggleAll();
         toDoPage.itemsLeftQuantity(quantity); // check quantity of created (not done sing tasks)
         Thread.sleep(5000);  // Time to see the result
         AssertionHelper.makeTrue(); // true if all done
     }
-
 }

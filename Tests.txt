@@ -1,0 +1,11 @@
+1. create task - (sendKeys() pressEnter() field)
+2. delete (one) - task (click() button)
+3. rename task - (doubleClick & sendKey()) ?
+4. sign (one) is done - (click() checkbox)
+5. sing (all) are done - (click() button)
+6. clear completed - (click() button)
+7. show active tasks (not done yet)
+8. show completed tasks (already completed)
+9. item left(is not completed counter)
+10.logo checker
+11.show tasks (all)

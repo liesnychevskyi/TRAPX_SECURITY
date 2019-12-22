@@ -9,10 +9,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ToDo_page //extends DriverManager
 {
@@ -39,7 +41,7 @@ public class ToDo_page //extends DriverManager
     @FindBy(xpath = "//strong[@data-reactid]")
     private WebElement itemsLeft_string;
 
-    @FindBy(xpath = "//a[@class='selected']")
+    @FindBy(xpath = "//a[@href='#/']")
     private WebElement all_button;
 
     @FindBy(xpath = "//a[@href='#/active']")
@@ -53,6 +55,7 @@ public class ToDo_page //extends DriverManager
 
     @FindBy(xpath = "//button[@class='clear-completed']")
     private WebElement clearCompeted_button;
+
     //----------------------------------------------------------------// Constructor
     public ToDo_page(WebDriver driver)
     {
@@ -67,7 +70,8 @@ public class ToDo_page //extends DriverManager
         whatNeedsToBeDone_button.sendKeys(taskName);
         whatNeedsToBeDone_button.sendKeys(Keys.ENTER);
     }
-    //------------------------------------------------------------------//
+
+    //----------------------------------------------------------------//
     public void checkTheLogo()
     {
         waitHelper = new WaitHelper(driver);
@@ -79,15 +83,24 @@ public class ToDo_page //extends DriverManager
         }
     }
     //------------------------------------------------------------------//
-    public void deleteTask()
+    public void deleteOneTask()
     {
-        waitHelper = new WaitHelper(driver);
-        waitHelper.WaitForElementClickable(lable, 30);
-
+       // separate function
     }
     //------------------------------------------------------------------//
-    public void deleteAllTasks()
+    public void clicClearCompletedBatton()
     {
+        waitHelper = new WaitHelper(driver);
+        waitHelper.WaitForElementClickable(clearCompeted_button, 30);
+        String res = clearCompeted_button.getText();
+        if(res.equalsIgnoreCase("Clear completed"))
+        {
+            clearCompeted_button.click();
+        }
+        else
+        {
+            AssertionHelper.makeFalse("Attention: << Clear competed >> button error !!!");
+        }
 
     }
     //------------------------------------------------------------------//
@@ -98,21 +111,25 @@ public class ToDo_page //extends DriverManager
         toggleAll_button.click();
     }
     //------------------------------------------------------------------//
-    public void clickCheckboxButton()
+    public void clickCheckboxButtonTaskCompleted(int x, int y)
     {
-        waitHelper = new WaitHelper(driver);
-        waitHelper.WaitForElementClickable(checkboxDone_button, 30);
-        checkboxDone_button.click();
-        boolean res = checkboxDone_button.isSelected();
-        if(res == true)
-        {
-            AssertionHelper.makeTrue();
-        }
+        waitHelper.setImplicitWait(10, TimeUnit.SECONDS);
+        new Actions(driver).moveByOffset(x, y).click().build().perform();
     }
     //------------------------------------------------------------------//
     public void clickActiveButton()
     {
-
+        waitHelper = new WaitHelper(driver);
+        waitHelper.WaitForElementClickable(active_button, 30);
+        String res = active_button.getText();
+        if(res.equalsIgnoreCase("active"))
+        {
+            active_button.click();
+        }
+        else
+        {
+            AssertionHelper.makeFalse("Attention: << Active >> button error !!!");
+        }
     }
     //------------------------------------------------------------------//
     public void renameFunction(String text)
@@ -127,14 +144,35 @@ public class ToDo_page //extends DriverManager
         }
     }
     //------------------------------------------------------------------//
-    public void clickCompletedButton()
+    public void clickAllButton()
     {
+        waitHelper = new WaitHelper(driver);
+        waitHelper.WaitForElementClickable(all_button, 30);
+        String res = all_button.getText();
+        if(res.equalsIgnoreCase("all"))
+        {
+            all_button.click();
+        }
+        else
+        {
+            AssertionHelper.makeFalse("Attention: << All >> button error !!!");
+        }
 
     }
     //------------------------------------------------------------------//
-    public void clickClearCompletedButton()
+    public void clickCompletedButton()
     {
-
+        waitHelper = new WaitHelper(driver);
+        waitHelper.WaitForElementClickable(completed_button, 30);
+        String res = completed_button.getText();
+        if(res.equalsIgnoreCase("completed"))
+        {
+            completed_button.click();
+        }
+        else
+        {
+            AssertionHelper.makeFalse("Attention: << Completed >> button error !!!");
+        }
     }
     //------------------------------------------------------------------//
     public void itemsLeftQuantity(String quantity)
