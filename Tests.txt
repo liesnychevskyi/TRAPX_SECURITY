@@ -9,7 +9,6 @@
 9. logo checker
 10.Items checker
 11.delete all completed tasks
-
-
+12. rename task -
 -------------------------------------------
-12. rename task - (doubleClick & sendKey())
+

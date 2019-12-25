@@ -1,20 +1,14 @@
 package tests;
 
-import methods_core.actions.MouseActions;
 import methods_core.assertion.AssertionHelper;
 import methods_core.java_script.JavaScriptHelper;
 import methods_core.loger.MyLogger;
 import methods_core.test_base.TestBase;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 import pages.ToDo_page;
 
-import java.util.List;
 
 public class RenameTask_test extends TestBase
 {
@@ -42,7 +36,6 @@ public class RenameTask_test extends TestBase
         toDoPage.createTask(taskName_2);
         Thread.sleep(7000);
         toDoPage.renameFunction(taskName_2, renameTask_0);
-
         Thread.sleep(5000);
         AssertionHelper.makeTrue();
     }

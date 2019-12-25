@@ -59,7 +59,7 @@ public class ToDo_page
     @FindBy(xpath = "//button[@class='clear-completed']")
     private WebElement clearCompeted_button;
 
-    @FindBy(xpath = "//input[@class='edit']")
+    @FindBy(xpath = "//input[@ value='3). Task']")
     private WebElement edit;
 
 
@@ -171,6 +171,7 @@ public class ToDo_page
                 js.doubleClick(e);
                 waitHelper = new WaitHelper(driver);
                 waitHelper.waitForElementToBeClickableIgnoringException(edit, 30);
+
                 edit.sendKeys(rename);
             }
         }
