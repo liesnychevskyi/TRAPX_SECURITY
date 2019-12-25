@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite">
+
+    <test name="Create task">
+        <classes>
+            <class name="tests.CreateTask_test"></class>
+        </classes>
+    </test>
+
+    <test name="Delete task">
+        <classes>
+            <class name="tests.DeleteTask_test"></class>
+        </classes>
+    </test>
+
+    <test name="Rename task">
+        <classes>
+            <class name="tests.RenameTask_test"></class>
+        </classes>
+    </test>
+
+    <test name="Click task done">
+        <classes>
+            <class name="tests.ClickTaskDone_test"></class>
+        </classes>
+    </test>
+
+    <test name="Click all tasks done">
+        <classes>
+            <class name="tests.ClickSetAllTasksIsDone_test"></class>
+        </classes>
+    </test>
+
+    <test name="Click All button">
+        <classes>
+            <class name="tests.ClickAllButton_test"></class>
+        </classes>
+    </test>
+
+    <test name="Click Active button">
+        <classes>
+            <class name="tests.ClickActiveButton_test"></class>
+        </classes>
+    </test>
+
+    <test name="Click Completed button">
+        <classes>
+            <class name="tests.ClickCompletedButton_test"></class>
+        </classes>
+    </test>
+
+    <test name="Click Clear completed button">
+        <classes>
+            <class name="tests.ClickClearCompletedButton_test"></class>
+        </classes>
+    </test>
+
+</suite>
+   
