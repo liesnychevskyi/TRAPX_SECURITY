@@ -7,18 +7,19 @@ import org.apache.log4j.Logger;
 import org.testng.annotations.Test;
 import pages.ToDo_page;
 
-public class CreateTask_test extends TestBase
+public class ClickSetAllTasksIsDone_test extends TestBase
 {
-    private Logger log = MyLogger.getLogger(CreateTask_test.class);
+    private Logger log = MyLogger.getLogger(ClickSetAllTasksIsDone_test.class);
     String taskName_0 = "1). Task";
     String taskName_1 = "2). Task";
     String taskName_2 = "3). Task";
     String taskName_3 = "4). Task";
     String taskName_4 = "5). Task";
     String quantity = "5";
+    String itemsLeft = "0";
 
     @Test
-    public void toDoTaskCreation() throws InterruptedException
+    public void allTasksIsDone() throws InterruptedException
     {
         driver.manage().window().maximize(); // maximize the browser window
         log.info("Window maximized..");  // log
@@ -40,8 +41,11 @@ public class CreateTask_test extends TestBase
         log.info("Created task_4");
         toDoPage.itemsLeftQuantity(quantity); // check quantity of created (not done sing tasks)
         log.info("Quantity is verified..");
-        Thread.sleep(5000);  // Time to see the result
+
         log.info("Sleeping 5000 ms");
+        toDoPage.clickAllDoneButton();
+        toDoPage.checkItemsLeft(itemsLeft);
+        Thread.sleep(5000);  // Time to see the result
         AssertionHelper.makeTrue(); // true if all done
     }
 

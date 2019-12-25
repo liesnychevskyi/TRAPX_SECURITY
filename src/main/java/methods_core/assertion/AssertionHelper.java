@@ -16,7 +16,7 @@ public class AssertionHelper
     //===========================================================//
     public static void makeTrue()
     {
-        log.info("Making script PASS..");
+        //log.info("Making script PASS..");
         Assert.assertTrue(true);
     }
     //===========================================================//

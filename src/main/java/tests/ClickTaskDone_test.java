@@ -29,7 +29,7 @@ public class ClickTaskDone_test extends TestBase
 //        new Actions(driver).moveByOffset(706, 382).click().build().perform(); 4
 //        new Actions(driver).moveByOffset(706, 441).click().build().perform(); 5
 
-    @Test(priority = 1)
+    @Test
     public void taskCompleted_0() throws InterruptedException
     {
         driver.manage().window().maximize(); // maximize the browser window
@@ -51,6 +51,34 @@ public class ClickTaskDone_test extends TestBase
         AssertionHelper.makeTrue(); // true if all done
     }
 //--------------------------------------------------------------------------------------//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //        List<WebElement> checkboxButtonsList = driver.findElements(By.xpath("//input[@class='toggle']"));
 //        java.util.Iterator<WebElement> i = checkboxButtonsList.iterator();
 //        while (i.hasNext())

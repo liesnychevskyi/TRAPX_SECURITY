@@ -9,7 +9,7 @@ import pages.ToDo_page;
 
 public class ClickAllButton_test extends TestBase
 {
-    private Logger log = MyLogger.getLogger(CreateTask_test.class);
+    private Logger log = MyLogger.getLogger(ClickAllButton_test.class);
     String taskName_0 = "1). Task";
     String taskName_1 = "2). Task";
     String taskName_2 = "3). Task";
@@ -21,7 +21,7 @@ public class ClickAllButton_test extends TestBase
     int y_0 = 205;
 
     @Test
-    public void clickActiveButton() throws InterruptedException
+    public void clickAllButton() throws InterruptedException
     {
         driver.manage().window().maximize(); // maximize the browser window
         log.info("Window maximized..");  // log
@@ -35,13 +35,9 @@ public class ClickAllButton_test extends TestBase
         toDoPage.createTask(taskName_3); // create the task
         toDoPage.createTask(taskName_4); // create the task
         toDoPage.itemsLeftQuantity(quantity_before); // check quantity of created (not done sing tasks)
-        Thread.sleep(5000);
         toDoPage.clickCheckboxButtonTaskCompleted(x_0, y_0);
-        Thread.sleep(5000);
         toDoPage.clickActiveButton();
-        Thread.sleep(5000);
         toDoPage.itemsLeftQuantity(quantity_after); // check quantity of created (not done sing tasks)
-        Thread.sleep(5000);
         toDoPage.clickAllButton();
         toDoPage.itemsLeftQuantity(quantity_after); // check quantity of created (not done sing tasks)
         Thread.sleep(5000);  // Time to see the result

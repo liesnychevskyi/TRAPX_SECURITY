@@ -16,7 +16,6 @@ public class WaitHelper
     private WebDriver driver;
     private Logger log = MyLogger.getLogger(WaitHelper.class);
     //====================================================================//
-
     /**
      * constructor will help us to initiate webDriver object
      * @param driver
@@ -25,7 +24,6 @@ public class WaitHelper
     {
         this.driver = driver;
     }
-
     /**
      * This is ImplicitlyWait method
      * @param timeout
@@ -37,40 +35,37 @@ public class WaitHelper
         log.info("Implicit Wait has been set to: " + timeout);
         driver.manage().timeouts().implicitlyWait(timeout, unit);
     }
-
     /**
      * This is will help us to get WebDriverWait object
      * @param timeOutInSeconds
-     * @param pollingEveryInMilisec
+     * @param pollingEveryInMilliseconds
      * @return
      */
     //====================================================================//
-    private WebDriverWait getWait(int timeOutInSeconds, int pollingEveryInMilisec )
+    private WebDriverWait getWait(int timeOutInSeconds, int pollingEveryInMilliseconds )
     {
         WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
-        wait.pollingEvery(Duration.ofMillis(pollingEveryInMilisec));
+        wait.pollingEvery(Duration.ofMillis(pollingEveryInMilliseconds));
         wait.ignoring(NoSuchElementException.class);
         wait.ignoring(ElementNotVisibleException.class);
         wait.ignoring(StaleElementReferenceException.class);
         wait.ignoring(NoSuchFrameException.class);
         return wait;
     }
-
     /**
      * This method will make sure element is visible
      * @param element
      * @param timeOutInSeconds
-     * @param pollingEveryMiliSec
+     * @param pollingEveryInMilliseconds
      */
     //====================================================================//
-    public void WaitForElementVisibleWithPollingTime(WebElement element, int timeOutInSeconds, int pollingEveryMiliSec)
+    public void WaitForElementVisibleWithPollingTime(WebElement element, int timeOutInSeconds, int pollingEveryInMilliseconds)
     {
-        log.info("Wating for : " + element.toString() + " for : " + timeOutInSeconds + " seconds");
-        WebDriverWait wait = getWait(timeOutInSeconds, pollingEveryMiliSec);
+        log.info("Waiting for : " + element.toString() + " for : " + timeOutInSeconds + " seconds");
+        WebDriverWait wait = getWait(timeOutInSeconds, pollingEveryInMilliseconds);
         wait.until(ExpectedConditions.visibilityOf(element));
         log.info("Element is visible now");
     }
-
     /**
      * This method will make sure element is clickable
      * @param element
@@ -79,12 +74,11 @@ public class WaitHelper
     //====================================================================//
     public void WaitForElementClickable(WebElement element, int timeOutInSeconds)
     {
-        log.info("Wating for : " + element.toString() + " for : " + timeOutInSeconds + " seconds");
+        log.info("Waiting for : " + element.toString() + " for : " + timeOutInSeconds + " seconds");
         WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
         wait.until(ExpectedConditions.elementToBeClickable(element));
         log.info("Element is clickable now");
     }
-
     /**
      * This method will make sure element invisibility of element
      * @param element
@@ -94,60 +88,56 @@ public class WaitHelper
     //====================================================================//
     public boolean WaitForElementNotPresent(WebElement element, long timeOutInSeconds)
     {
-        log.info("Wating for : " + element.toString() + " for : " + timeOutInSeconds + " seconds");
+        log.info("Waiting for : " + element.toString() + " for : " + timeOutInSeconds + " seconds");
         WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
         boolean status = wait.until(ExpectedConditions.invisibilityOf(element));
         log.info("Element is invisible now");
         return status;
     }
-
     /**
      * This method will for frameToBeAvailableAndSwitchToIt
      * @param element
      * @param timeOutInSeconds
      */
     //====================================================================//
-    public void WaitForframeToBeAvailableAndSwitchToIt(WebElement element, long timeOutInSeconds)
+    public void WaitForFrameToBeAvailableAndSwitchToIt(WebElement element, long timeOutInSeconds)
     {
-        log.info("Wating for : " + element.toString() + " for : " + timeOutInSeconds + " seconds");
+        log.info("Waiting for : " + element.toString() + " for : " + timeOutInSeconds + " seconds");
         WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(element));
         log.info("Frame is available and switched now");
     }
-
     /**
      * This method will give us fluentWait object
      * @param timeOutInSeconds
-     * @param polingEveryIntMiliSec
+     * @param pollingEveryInMilliseconds
      * @return
      */
     //====================================================================//
-    private Wait<WebDriver> getFluentWait(int timeOutInSeconds, int polingEveryIntMiliSec)
+    private Wait<WebDriver> getFluentWait(int timeOutInSeconds, int pollingEveryInMilliseconds)
     {
         Wait<WebDriver> fWait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(timeOutInSeconds))
-        .pollingEvery(Duration.ofMillis(polingEveryIntMiliSec)).ignoring(NoSuchElementException.class);
+        .pollingEvery(Duration.ofMillis(pollingEveryInMilliseconds)).ignoring(NoSuchElementException.class);
         return fWait;
     }
-
     /**
      *This element will help us to for element appearance
      * @param element
      * @param timeOutInSeconds
-     * @param polingEveryInMiliSec
+     * @param pollingEveryInMilliseconds
      * @return
      */
     //====================================================================//
-//    public WebElement waitForElement(WebElement element, int timeOutInSeconds, int polingEveryInMiliSec)
-//    {
-//        log.info("");
-//        getFluentWait(timeOutInSeconds, timeOutInSeconds);
-//        Wait<WebDriver> fwait = getFluentWait(timeOutInSeconds, polingEveryInMiliSec);
-//        //fwait.until(ExpectedConditions.elementToBeClickable(element));
-//        fwait.until(ExpectedConditions.visibilityOf(element));
-//        return element;
-//    }
+    public WebElement waitForElement(WebElement element, int timeOutInSeconds, int pollingEveryInMilliseconds)
+    {
+        log.info("");
+        getFluentWait(timeOutInSeconds, timeOutInSeconds);
+        Wait<WebDriver> fwait = getFluentWait(timeOutInSeconds, pollingEveryInMilliseconds);
+        fwait.until(ExpectedConditions.elementToBeClickable(element));
+        fwait.until(ExpectedConditions.visibilityOf(element));
+        return element;
+    }
     //====================================================================//
-
     /**
      * This metod will help us to
      * @param timeout
@@ -159,7 +149,6 @@ public class WaitHelper
         driver.manage().timeouts().pageLoadTimeout(timeout, unit);
         log.info("Page is loaded");
     }
-
     //====================================================================//
     public void waitForElement(WebElement element, int timeOutInSeconds)
     {
@@ -169,7 +158,6 @@ public class WaitHelper
         log.info("Element is visible now");
     }
     //====================================================================//
-    //====================================================================//
     public void waitForElementIsPresentIgnoringExaption(WebElement element, int timeOutInSeconds)
     {
         log.info("Wait for: " + element.toString() + " for: " + timeOutInSeconds + " seconds");
@@ -177,11 +165,12 @@ public class WaitHelper
         log.info("Element is visible now");
     }
     //====================================================================//
-    public void waitForElementToBeClickableIgnoringExaption(WebElement element, int timeOutInSeconds)
+    public void waitForElementToBeClickableIgnoringException(WebElement element, int timeOutInSeconds)
     {
         log.info("Wait for: " + element.toString() + " for: " + timeOutInSeconds + " seconds");
         WebElement wait = new WebDriverWait(driver, timeOutInSeconds).ignoring(StaleElementReferenceException.class).until(ExpectedConditions.elementToBeClickable(element));
         log.info("Element is clickable now");
     }
+    //====================================================================//
 
 }

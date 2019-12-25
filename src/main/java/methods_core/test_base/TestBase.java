@@ -43,14 +43,17 @@ public class TestBase
 //        driver.quit();
 //    }
 //===================================================================================/ Boni Garcia it is online driver from Github
-// We can use it to avoid mistakes of compatibility versions
+// We use it to avoid mistakes of compatibility versions
 // If you want use different browsers, you should have the browser on testing machine
 // https://github.com/bonigarcia/webdrivermanager
+//===================================================================================//
     @BeforeTest
     public void beforeTest()
     {
         DriverManager driverManager = new DriverManager();
+        log.info("Driver instance is created..");  // log
         driver = driverManager.chromeDriver();
+        log.info("Driver is launched..");  // log
     }
 //===================================================================================//
     public static void logExtentReport(String log)
@@ -67,8 +70,12 @@ public class TestBase
     @AfterClass
     public void tearDown()
     {
-        driver.quit();
+        if(driver != null)
+        {
+            driver.quit();
+            log.info("Driver stopped..");  // log
+        }
     }
-
+//===================================================================================//
 }
 

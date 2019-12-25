@@ -36,6 +36,14 @@ public class JavaScriptHelper
         return exe.executeScript(script, args);
     }
     //============================================================//
+    public void mouseOver(WebElement element)
+    {
+        String javaScript = "var evObj = document.createEvent('MouseEvents');" +
+        "evObj.initMouseEvent('mouseover',true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);" +
+         "arguments[0].dispatchEvent(evObj);";
+        ((JavascriptExecutor)driver).executeScript(javaScript, element);
+    }
+    //============================================================//
     public void scrollToElement(WebElement element)
     {
         log.info("Scroll to WebElement...");

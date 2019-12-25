@@ -4,8 +4,12 @@ import methods_core.assertion.AssertionHelper;
 import methods_core.loger.MyLogger;
 import methods_core.test_base.TestBase;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import pages.ToDo_page;
+
+import java.util.List;
 
 public class ClickClearCompletedButton_test extends TestBase
 {
@@ -40,10 +44,13 @@ public class ClickClearCompletedButton_test extends TestBase
         Thread.sleep(5000);
         toDoPage.itemsLeftQuantity(quantity_after); // check quantity of created (not done sing tasks)
         Thread.sleep(5000);
-        toDoPage.clicClearCompletedBatton();
+        WebElement res = driver.findElement(By.xpath("//button[@class='clear-completed']"));
+        System.out.println(res.getText());
+        toDoPage.clickClearCompletedButton();
         toDoPage.itemsLeftQuantity(quantity_after); // check quantity of created (not done sing tasks)
+        toDoPage.checkElementIsNotPresent();
 
         Thread.sleep(5000);  // Time to see the result
-        AssertionHelper.makeTrue(); // true if all done
+
     }
 }

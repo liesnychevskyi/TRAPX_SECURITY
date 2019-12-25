@@ -2,6 +2,8 @@ package pages;
 
 import methods_core.actions.MouseActions;
 import methods_core.assertion.AssertionHelper;
+import methods_core.assertion.VerificationHelper;
+import methods_core.java_script.JavaScriptHelper;
 import methods_core.loger.MyLogger;
 import methods_core.wait.WaitHelper;
 import org.apache.log4j.Logger;
@@ -16,12 +18,13 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class ToDo_page //extends DriverManager
+public class ToDo_page
 {
     private final Logger log = MyLogger.getLogger(ToDo_page.class);
-    public WebDriver driver;
-    WaitHelper waitHelper;
-    MouseActions action;
+    private WebDriver driver;
+    private WaitHelper waitHelper;
+    private MouseActions action;
+    private JavaScriptHelper js;
     //----------------------------------------------------------------//
     @FindBy(xpath = "//h1[@data-reactid]")
     private WebElement lable;
@@ -56,6 +59,11 @@ public class ToDo_page //extends DriverManager
     @FindBy(xpath = "//button[@class='clear-completed']")
     private WebElement clearCompeted_button;
 
+    @FindBy(xpath = "//input[@class='edit']")
+    private WebElement edit;
+
+
+
     //----------------------------------------------------------------// Constructor
     public ToDo_page(WebDriver driver)
     {
@@ -70,12 +78,11 @@ public class ToDo_page //extends DriverManager
         whatNeedsToBeDone_button.sendKeys(taskName);
         whatNeedsToBeDone_button.sendKeys(Keys.ENTER);
     }
-
     //----------------------------------------------------------------//
     public void checkTheLogo()
     {
         waitHelper = new WaitHelper(driver);
-        waitHelper.WaitForElementClickable(lable, 30);
+        waitHelper.waitForElement(lable, 30);
         String logo = lable.getText();
         if(logo.equalsIgnoreCase("todos"))
         {
@@ -83,12 +90,30 @@ public class ToDo_page //extends DriverManager
         }
     }
     //------------------------------------------------------------------//
-    public void deleteOneTask()
+    public void checkElementIsNotPresent()
     {
-       // separate function
+       VerificationHelper verificationHelper = new VerificationHelper(driver);
+       boolean res = verificationHelper.isNotDisplayed(clearCompeted_button);
+       if(res == true)
+       {
+           AssertionHelper.pass();
+       }
+       else
+       {
+           AssertionHelper.fail();
+       }
     }
     //------------------------------------------------------------------//
-    public void clicClearCompletedBatton()
+    public void deleteOneTask()
+    {
+        action = new MouseActions(driver);
+        action.mouseOver(checkboxDone_button);
+        waitHelper = new WaitHelper(driver);
+        waitHelper.WaitForElementClickable(x_mark_destroy_list, 30);
+        x_mark_destroy_list.click();
+    }
+    //------------------------------------------------------------------//
+    public void clickClearCompletedButton()
     {
         waitHelper = new WaitHelper(driver);
         waitHelper.WaitForElementClickable(clearCompeted_button, 30);
@@ -101,7 +126,6 @@ public class ToDo_page //extends DriverManager
         {
             AssertionHelper.makeFalse("Attention: << Clear competed >> button error !!!");
         }
-
     }
     //------------------------------------------------------------------//
     public void clickToggleAll()
@@ -132,15 +156,23 @@ public class ToDo_page //extends DriverManager
         }
     }
     //------------------------------------------------------------------//
-    public void renameFunction(String text)
+    public void renameFunction(String taskName, String rename)
     {
-        List<WebElement> tasks = driver.findElements(By.xpath("//div[@class='view']"));
-        action = new MouseActions(driver);
-        for(WebElement ele : tasks)
+        List<WebElement> taskList = driver.findElements(By.xpath("//label[@data-reactid]"));
+
+        new Actions(driver);
+
+        for(WebElement e : taskList)
         {
-            System.out.println(ele);
-//            action.doubleClick(ele);
-//            ele.sendKeys(text);
+            if(e.getText().equalsIgnoreCase(taskName))
+            {
+                System.out.println("element is: " + e.getText());
+                js = new JavaScriptHelper(driver);
+                js.doubleClick(e);
+                waitHelper = new WaitHelper(driver);
+                waitHelper.waitForElementToBeClickableIgnoringException(edit, 30);
+                edit.sendKeys(rename);
+            }
         }
     }
     //------------------------------------------------------------------//
@@ -157,7 +189,6 @@ public class ToDo_page //extends DriverManager
         {
             AssertionHelper.makeFalse("Attention: << All >> button error !!!");
         }
-
     }
     //------------------------------------------------------------------//
     public void clickCompletedButton()
@@ -183,7 +214,41 @@ public class ToDo_page //extends DriverManager
         System.out.println(res + " - items");
         AssertionHelper.verifyText(res, quantity);
     }
+    //------------------------------------------------------------------//
+    public void clickAllDoneButton()
+    {
+        waitHelper = new WaitHelper(driver);
+        waitHelper.waitForElement(toggleAll_button, 30);
+        toggleAll_button.click();
+        VerificationHelper verificationHelper = new VerificationHelper(driver);
+        boolean res = verificationHelper.isDisplayed(clearCompeted_button);
 
+        if(res == true)
+        {
+            AssertionHelper.pass();
+        }
+        else
+        {
+            AssertionHelper.fail();
+        }
+    }
+    //------------------------------------------------------------------//
+    public void checkItemsLeft(String items)
+    {
+        waitHelper = new WaitHelper(driver);
+        waitHelper.waitForElement(itemsLeft_string, 30);
+        String res = itemsLeft_string.getText();
+
+        if(res.equals(items))
+        {
+            AssertionHelper.pass();
+        }
+        else
+        {
+            AssertionHelper.fail();
+        }
+    }
+    //------------------------------------------------------------------//
 
 
 }
