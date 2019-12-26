@@ -36,7 +36,8 @@ public class ClickClearCompletedButton_test extends TestBase
         toDoPage.createTask(taskName_4); // create the task
         toDoPage.itemsLeftQuantity(quantity_before); // check quantity of created (not done sing tasks)
         Thread.sleep(5000);
-        toDoPage.clickCheckboxButtonTaskCompleted(x_0, y_0);
+        int res[] = toDoPage.getSingleCoordinates(toDoPage.checkboxDone_button); // It takes automatically x, y coordinates of machine where is test running and puts is into the test
+        toDoPage.clickCheckboxButtonTaskCompleted(res[0], res[1]);
         Thread.sleep(5000);
         toDoPage.itemsLeftQuantity(quantity_after); // check quantity of created (not done sing tasks)
         Thread.sleep(5000);

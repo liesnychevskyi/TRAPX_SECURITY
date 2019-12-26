@@ -31,7 +31,8 @@ public class ClickAllButton_test extends TestBase
         toDoPage.createTask(taskName_3); // create the task
         toDoPage.createTask(taskName_4); // create the task
         toDoPage.itemsLeftQuantity(quantity_before); // check quantity of created (not done sing tasks)
-        toDoPage.clickCheckboxButtonTaskCompleted(x_0, y_0);
+        int res[] = toDoPage.getSingleCoordinates(toDoPage.checkboxDone_button); // It takes automatically x, y coordinates of machine where is test running and puts is into the test
+        toDoPage.clickCheckboxButtonTaskCompleted(res[0], res[1]);
         toDoPage.clickActiveButton();
         toDoPage.itemsLeftQuantity(quantity_after); // check quantity of created (not done sing tasks)
         toDoPage.clickAllButton();
