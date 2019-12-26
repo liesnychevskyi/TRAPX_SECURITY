@@ -23,10 +23,6 @@ public class ClickCompletedButton_test extends TestBase
     @Test
     public void clickActiveButton() throws InterruptedException
     {
-        driver.manage().window().maximize(); // maximize the browser window
-        log.info("Window maximized..");  // log
-        driver.get("http://todomvc.com/examples/react/#/"); // address (app under test)
-        log.info("Get to the page..");  // log
         ToDo_page toDoPage = new ToDo_page(driver); // make instance of maine page
         toDoPage.checkTheLogo(); // check the logo and to be sure that on landing page
         toDoPage.createTask(taskName_0); // create the task
@@ -34,6 +30,7 @@ public class ClickCompletedButton_test extends TestBase
         toDoPage.createTask(taskName_2); // create the task
         toDoPage.createTask(taskName_3); // create the task
         toDoPage.createTask(taskName_4); // create the task
+
         toDoPage.itemsLeftQuantity(quantity_before); // check quantity of created (not done sing tasks)
         Thread.sleep(5000);
         toDoPage.clickCheckboxButtonTaskCompleted(x_0, y_0);
@@ -42,7 +39,6 @@ public class ClickCompletedButton_test extends TestBase
         Thread.sleep(5000);
         toDoPage.clickCompletedButton();
         toDoPage.itemsLeftQuantity(quantity_after); // check quantity of created (not done sing tasks)
-
         Thread.sleep(5000);  // Time to see the result
         AssertionHelper.makeTrue(); // true if all done
     }

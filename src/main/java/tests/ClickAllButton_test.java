@@ -23,10 +23,6 @@ public class ClickAllButton_test extends TestBase
     @Test
     public void clickAllButton() throws InterruptedException
     {
-        driver.manage().window().maximize(); // maximize the browser window
-        log.info("Window maximized..");  // log
-        driver.get("http://todomvc.com/examples/react/#/"); // address (app under test)
-        log.info("Get to the page..");  // log
         ToDo_page toDoPage = new ToDo_page(driver); // make instance of maine page
         toDoPage.checkTheLogo(); // check the logo and to be sure that on landing page
         toDoPage.createTask(taskName_0); // create the task

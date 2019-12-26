@@ -27,10 +27,6 @@ public class ClickClearCompletedButton_test extends TestBase
     @Test
     public void clickActiveButton() throws InterruptedException
     {
-        driver.manage().window().maximize(); // maximize the browser window
-        log.info("Window maximized..");  // log
-        driver.get("http://todomvc.com/examples/react/#/"); // address (app under test)
-        log.info("Get to the page..");  // log
         ToDo_page toDoPage = new ToDo_page(driver); // make instance of maine page
         toDoPage.checkTheLogo(); // check the logo and to be sure that on landing page
         toDoPage.createTask(taskName_0); // create the task
@@ -44,12 +40,9 @@ public class ClickClearCompletedButton_test extends TestBase
         Thread.sleep(5000);
         toDoPage.itemsLeftQuantity(quantity_after); // check quantity of created (not done sing tasks)
         Thread.sleep(5000);
-        WebElement res = driver.findElement(By.xpath("//button[@class='clear-completed']"));
-        System.out.println(res.getText());
         toDoPage.clickClearCompletedButton();
         toDoPage.itemsLeftQuantity(quantity_after); // check quantity of created (not done sing tasks)
         toDoPage.checkElementIsNotPresent();
-
         Thread.sleep(5000);  // Time to see the result
 
     }

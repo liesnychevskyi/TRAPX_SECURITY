@@ -54,6 +54,10 @@ public class TestBase
         log.info("Driver instance is created..");  // log
         driver = driverManager.chromeDriver();
         log.info("Driver is launched..");  // log
+        driver.manage().window().maximize(); // maximize the browser window
+        log.info("Window maximized..");  // log
+        driver.get("http://todomvc.com/examples/react/#/"); // address (app under test)
+        log.info("Get to the page..");  // log
     }
 //===================================================================================//
     public static void logExtentReport(String log)

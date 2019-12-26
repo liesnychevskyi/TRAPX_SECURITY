@@ -7,13 +7,12 @@ import methods_core.java_script.JavaScriptHelper;
 import methods_core.loger.MyLogger;
 import methods_core.wait.WaitHelper;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.Test;
+import tests.ClickTaskDone_test;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -33,10 +32,10 @@ public class ToDo_page
     private WebElement whatNeedsToBeDone_button;
 
     @FindBy(xpath = "//label[@for='toggle-all']")
-    private WebElement toggleAll_button;
+    public WebElement toggleAll_button;
 
     @FindBy(xpath = "//input[@class='toggle']")
-    private WebElement checkboxDone_button;
+    public WebElement checkboxDone_button;
 
     @FindBy(xpath = "//div[@class='view']")
     private WebElement tasksList;
@@ -159,7 +158,6 @@ public class ToDo_page
     public void renameFunction(String taskName, String rename)
     {
         List<WebElement> taskList = driver.findElements(By.xpath("//label[@data-reactid]"));
-
         new Actions(driver);
 
         for(WebElement e : taskList)
@@ -250,6 +248,32 @@ public class ToDo_page
         }
     }
     //------------------------------------------------------------------//
+    public int[] getSingleCoordinates(WebElement element)
+    {
+        //Locate element for which you wants to retrieve x y coordinates.
+        //Used points class to get x and y coordinates of element.
+        Point classname = element.getLocation();
+        int xcordi = classname.getX();
+        System.out.println("Element's Position from left side " + xcordi + " x - pixels.");
+        int ycordi = classname.getY();
+        System.out.println("Element's Position from top " + ycordi + " y - pixels.");
+        System.out.println("||-----------------------------------------------------||");
+        return new int[]{xcordi, ycordi};
+    }
+    //------------------------------------------------------------------//
+    public void getMultiplesCoordinates(WebElement element)
+    {
+        List<WebElement> checkboxButtonsList = driver.findElements(By.xpath("//input[@class='toggle']"));
 
+        for(WebElement e : checkboxButtonsList)
+        {
+            Point classname = e.getLocation();
+            System.out.println("||-----------------------------------------------------||");
+            int xcordi = classname.getX();
+            System.out.println("Element's Position from left side " + xcordi + " x - pixels.");
+            int ycordi = classname.getY();
+            System.out.println("Element's Position from top " + ycordi + " y - pixels.");
+        }
+    }
 
 }

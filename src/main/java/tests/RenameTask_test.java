@@ -26,10 +26,6 @@ public class RenameTask_test extends TestBase
     @Test
     public void renameTest() throws InterruptedException
     {
-        driver.manage().window().maximize();
-        log.info("Window maximized..");
-        driver.get("http://todomvc.com/examples/react/#/");
-        log.info("Get to the page..");
         ToDo_page toDoPage = new ToDo_page(driver);
         toDoPage.createTask(taskName_0);
         toDoPage.createTask(taskName_1);
